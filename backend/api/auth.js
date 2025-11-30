@@ -31,7 +31,7 @@ export default async function handler(req, res) {
           { userId: user.id, email: user.email },
           process.env.JWT_SECRET || "my-secret-key",
           {
-            expiresIn: "20d",
+            expiresIn: "70d",
           }
         );
 
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
           { userId: user.id, email: user.email },
           process.env.JWT_SECRET || "my-secret-key",
           {
-            expiresIn: "10d",
+            expiresIn: "40d",
           }
         );
 

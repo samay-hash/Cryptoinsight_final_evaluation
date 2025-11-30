@@ -1,6 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
-const bcrypt = require("bcryptjs"); //securely encrypt the password 
-const jwt = require("jsonwebtoken"); //Login hone ke baad token issue karne ke liye
+const bcrypt = require("bcryptjs");  
+const jwt = require("jsonwebtoken");  
 
 const prisma = new PrismaClient();
 
@@ -20,7 +20,7 @@ const signup = async (req, res) => {
       data: {
         email,
         password: hashedPassword,
-      }, //stores email and hashed password in DB
+      }, 
     });
     const token = jwt.sign(
       { userId: user.id, email: user.email },
@@ -28,18 +28,11 @@ const signup = async (req, res) => {
       {
         expiresIn: "7d",
       }
-    ); //jwt.sign- Token create, userId, email, Token payload → verify karne me kaam aayega, JWT_SECRET-Token encryption key
-
-    const refreshToken = jwt.sign(
-      { userId: user.id },
-      process.env.JWT_REFRESH_SECRET || "@3%##$$5%5",
-      { expiresIn: "30d" }
-    );
+    ); 
 
     res.status(201).json({
         message: "User created successfully",
         token,
-        refreshToken,
         user: { id: user.id, email: user.email },
       }); //this gives frontend 3 things: message token and user detail
   } catch (error) {
@@ -73,7 +66,6 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    //   JWT
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       process.env.JWT_SECRET || "@ssidisamsu#$2@",
@@ -81,16 +73,10 @@ const login = async (req, res) => {
         expiresIn: "10d",
       }
     );
-    const refreshToken = jwt.sign(
-      { userId: user.id },
-      process.env.JWT_REFRESH_SECRET || "@ssidisamsu#$2@",
-      { expiresIn: "30d" }
-    );
     // console.log('Login successful for user:', user.email);
     res.json({
       message: "Login successful",
       token,
-      refreshToken,
       user: { id: user.id, email: user.email },
     });
   } catch (error) {
