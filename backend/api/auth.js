@@ -10,7 +10,6 @@ export default async function handler(req, res) {
 
     try {
       if (req.url.endsWith('/signup')) {
-        // Signup 
         const existingUser = await prisma.user.findUnique({
           where: { email },
         });

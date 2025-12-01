@@ -10,7 +10,6 @@ const app = express();
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(
   cors({
     origin: "*",
@@ -20,7 +19,7 @@ app.use(
 );
 app.use(express.json());
 
-// Routes
+ 
 app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
@@ -32,9 +31,9 @@ app.listen(PORT, () => {
 });
 
 
-process.on("SIGINT", async () => {
-  await prisma.$disconnect();
-  process.exit(0);
-});
+// process.on("SIGINT", async () => {
+//   await prisma.$disconnect();
+//   process.exit(0);
+// });
 
  

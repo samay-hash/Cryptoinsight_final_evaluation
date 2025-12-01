@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // --- API Calls ---
+  
   const API_BASE = 'http://localhost:5000/api/auth';
 
   const login = async (email, password) => {

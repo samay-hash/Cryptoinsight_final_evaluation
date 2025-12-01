@@ -26,7 +26,7 @@ const signup = async (req, res) => {
       { userId: user.id, email: user.email },
       process.env.JWT_SECRET || "@ssidisamsu#$2@",
       {
-        expiresIn: "7d",
+        expiresIn: "70d",
       }
     ); 
 
@@ -70,7 +70,7 @@ const login = async (req, res) => {
       { userId: user.id, email: user.email },
       process.env.JWT_SECRET || "@ssidisamsu#$2@",
       {
-        expiresIn: "10d",
+        expiresIn: "70d",
       }
     );
     // console.log('Login successful for user:', user.email);
