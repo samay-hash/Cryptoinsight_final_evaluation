@@ -29,7 +29,8 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   
-  const API_BASE = 'http://localhost:5000/api/auth';
+  // const API_BASE = 'http://localhost:5000/api/auth';
+  const API_BASE = 'https://cryptoinsight-final-evaluation-1.onrender.com/api/auth'
 
   const login = async (email, password) => {
     const response = await fetch(`${API_BASE}/login`, {
