@@ -29,12 +29,14 @@ const signup = async (req, res) => {
         expiresIn: "70d",
       }
     ); 
-
     res.status(201).json({
         message: "User created successfully",
         token,
-        user: { id: user.id, email: user.email },
-      }); //this gives frontend 3 things: message token and user detail
+        user: {
+           id: user.id,
+           email: user.email
+           },
+      });  
   } catch (error) {
     console.error("Signup error:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -49,16 +51,12 @@ const login = async (req, res) => {
       where: { email },
     });
 
-    // console.log('Login attempt for email:', email);
-    // console.log('User found in DB:', !!user);
 
     if (!user) {
-      // console.log('User not found');
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    // Check password
-    const isPasswordValid = await bcrypt.compare(password, user.password); //User ke input Password ko DB wale Hashed password se match karta hai
+    const isPasswordValid = await bcrypt.compare(password, user.password);  
     // console.log('Password comparison result:', isPasswordValid);
 
     if (!isPasswordValid) {
